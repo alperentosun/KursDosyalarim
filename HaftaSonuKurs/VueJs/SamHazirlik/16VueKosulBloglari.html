@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <title>VUE ICERIK</title>
+</head>
+<body>
+    <div id="UlasBana">
+            <p v-if="durumBilgisi">Göster butonuna basıldı ve ben artık gözüküyorum</p>
+            <p v-else>Artık göremezsin!</p>
+            <button @click="durumBilgisi=!durumBilgisi">Göster/Gizle</button>
+
+
+            <div v-if="sayi<10">Sayı ondan küçüktür</div>
+            <div v-else-if="sayi>10">Sayı ondan büyüktür</div>
+            <div v-else>Sayı ondur.</div>
+
+    </div>
+    
+    <script>
+            new Vue({
+                el:"#UlasBana",
+                data:{
+                  durumBilgisi:false,
+                  sayi:2,
+                },
+                methods:{
+                   
+                }
+            });
+
+
+    </script>
+</body>
+</html>

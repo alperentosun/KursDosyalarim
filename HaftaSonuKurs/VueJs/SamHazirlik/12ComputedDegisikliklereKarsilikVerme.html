@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <title>Computed ile Method arasındaki farklar!</title>
+</head>
+<body>
+    <div id="Ulas">
+        <button v-on:click="Eksilt">Eksilt</button>
+        <button v-on:click="Arttir">Arttır</button>
+        <button v-on:click="Arttiryeni">Arttır YENİİ</button>
+        <button v-on:click="Mesajdegis">Mesaj değiştir</button>
+        <p>{{ mesaj }}</p>
+        <p>{{ sayi }}</p>
+        <p>{{ sayiyeni }}</p>
+        <p>{{ sonuc }}</p>
+        <p>{{ sonucFunction() }}</p><!--  Performas düşer. Nesne her build edildiğinde çalışır ! -->
+        <p>{{ sonucbu }}</p>
+    </div>
+    <script>
+        new Vue(
+            {
+                el:"#Ulas",
+                data:{
+                  sayi:0,
+                  sayiyeni:0,
+                  sonuc:"",
+                  mesaj:"Her mesaj değiştiğinde Ulas id li divin içeriği yeniden derlenir!!"
+                },
+                methods:{
+                    Mesajdegis:function(){
+                        this.mesaj="Mesaj içeriği değişti. Vue js tarafından Ulas idli div içeriği derlendi."
+                    },
+                    Arttiryeni:function(){
+                        this.sayiyeni++;
+                    },
+                    /* KOOD TEKRARI YAPTIK. Bu bir hata. */
+                    Arttir:function(){
+                        this.sayi++;
+                       // this.sonuc=this.sayi>10?"Sayı Ondan Büyüktür.":"Sayı Ondan Küçüktür.";
+                    },  
+                    
+                    Eksilt:function(){
+                        this.sayi--;
+                        //this.sonuc=this.sayi>10?"Sayı Ondan Büyüktür.":"Sayı Ondan Küçüktür.";
+                    },
+                    sonucFunction:function(){ //İKİ DEFA KOD YAZMAKTAN KURATARIR AMA PERFORMANS GEREKSİZ ÇALIŞIR.
+                        console.log("Method Çalıştı");
+                        return this.sayi>10?"Sayı Ondan Büyüktür.":"Sayı Ondan Küçüktür.";
+                    }
+                },
+                computed:
+                { //Fonksiyoon gibi davranır kodu analiz eder ve kodun içerisinde ihtiyacımız olan değişken değişmiş ise çalışır 
+                    sonucbu:function()
+                    {
+                        console.log("computed Çalıştı");
+                        return this.sayi>10?"Sayı Ondan Büyüktür.":"Sayı Ondan Küçüktür.";
+                    }
+                }
+            }
+        );
+    </script>
+</body>
+</html>
